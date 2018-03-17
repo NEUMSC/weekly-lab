@@ -14,6 +14,6 @@
     - requests   安装方法：`pip install requests`  
     - BeautifulSoup [安装方法见此处](https://www.crummy.com/software/BeautifulSoup/bs4/doc/index.zh.html#id5)
     - jupyter notebook  [安装方法见此处](http://jupyter.org/install)
-
+    - matplotlib 安装方法：`pip install -U matplotlib`  或者查看[官方教程](https://matplotlib.org/users/installing.html)
 - **推荐使用**chrome或者Firefox浏览器
 
