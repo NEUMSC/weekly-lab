@@ -17,3 +17,7 @@
     - matplotlib 安装方法：`pip install -U matplotlib`  或者查看[官方教程](https://matplotlib.org/users/installing.html)
 - **推荐使用**chrome或者Firefox浏览器
 
+## 文件列表
+- tutorial_ecard.ipynb 需要填空的
+- tutorial_ecard_completed.ipynb 完成版（供参考）
+
