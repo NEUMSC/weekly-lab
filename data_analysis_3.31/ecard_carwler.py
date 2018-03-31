@@ -62,7 +62,7 @@ def main():
     consume_response0 = session.get(url_consumeInfo)
     consume_soup = BeautifulSoup(consume_response0.text, 'html.parser')
     print('日期样式：2018-03-11')
-    startDate = input('日期样式：2018-03-11\n请输入查询起始日期:')
+    startDate = input('请输入查询起始日期:')
     endDate = input('请输入查询终止日期:')
     # 还可以用columns指定想要的列
     info_table = get_all_table(session, consume_soup, startDate, endDate)
@@ -101,7 +101,6 @@ def get_all_table(session, consume_soup, startDate, endDate):
     list_page = consume_soup.find(
         id='ContentPlaceHolder1_AspNetPager1').find_all('a')
     if len(list_page) > 3:
-        print(list_page)
         a = int(list_page[-4].text)
         for i in range(2, a + 1):
             consume_soup, tmp = get_table(
@@ -128,7 +127,7 @@ def saveto_csv(info_table, name):
         data.setdefault(head, []).append(content)
     frame = pd.DataFrame(data)
     # 如果不要列头 即中文部分 可以增加参数 header=False 而后想要把多页表格输出到统一表格时  需要加入参数 model = 'a' (default为'w')
-    frame.to_csv(name, index=False, sep=',')
+    frame.to_csv(name, index=False, sep=',',encoding='utf-8')
 
 
 if __name__ == '__main__':
