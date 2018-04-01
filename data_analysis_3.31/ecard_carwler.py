@@ -7,6 +7,7 @@ import random
 import matplotlib.pyplot as plt
 from PIL import Image
 import pandas as pd
+import re
 
 url_login = 'http://ecard.neu.edu.cn/SelfSearch/Login.aspx'
 url_captcha_f = 'http://ecard.neu.edu.cn/SelfSearch/validateimage.ashx?%f'
@@ -100,12 +101,18 @@ def get_all_table(session, consume_soup, startDate, endDate):
 
     list_page = consume_soup.find(
         id='ContentPlaceHolder1_AspNetPager1').find_all('a')
-    if len(list_page) > 3:
-        a = int(list_page[-4].text)
-        for i in range(2, a + 1):
-            consume_soup, tmp = get_table(
-                session, consume_soup, startDate, endDate, page=i)
-            info_table.append(tmp)
+    maxpager = 1
+    for a in list_page:
+        if 'href' not in a.attrs:
+            continue
+        matched = re.match(".*\'(?P<num>\d+)\'", a['href'])
+        if matched is not None:
+            pager = int(matched.group('num'))
+            maxpager = max(pager, maxpager)
+    for i in range(2, maxpager + 1):
+        consume_soup, tmp = get_table(
+            session, consume_soup, startDate, endDate, page=i)
+        info_table.append(tmp)
     return info_table
 
 
